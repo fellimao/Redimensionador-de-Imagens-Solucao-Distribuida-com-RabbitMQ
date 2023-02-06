@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+    rabbitmq:
+        image: rabbitmq:3-management
+        container_name: rabbitmq
+        ports:
+            - "25672:25672"
+            - "15672:15672"
+        volumes:
+            - /docker_conf/rabbitmq/data/:/var/lib/rabbitmq/
+        environment:
+            - RABBITMQ_DEFAULT_USER = guest
+            - RABBITMQ_DEFAULT_PASS = guest
+
+    web:
+        build: /API/.
+        container_name: djangoAPI
+        command: sh -c "python manage.py runserver 0.0.0.0:8000 & python manage.py runscript ConsumerResults"
+        volumes:
+            - .:/code
+        ports:
+            - "8000:8000"
+        depends_on:
+            - rabbitmq
+        
+    app:
+        build: /ImageResizer/.
+        container_name: image_processor
+        command: python ImageConsumer.py
+        volumes:
+            - .:/code
+        restart: on-failure
