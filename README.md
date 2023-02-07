@@ -55,6 +55,19 @@ Na <b>aplicação API</b>, existe um script chamado ConsumerResults.py rodando e
 | --- | --- |
 | 200 (OK) em caso de sucesso | id: ID da imagem específica <br> arquivo: Caminho da imagem específica <br> status_processamento: Status da imagem específica (Pendente/Finalizado) <br> data_upload: Data do upload da imagem específica |
 
+### **DELETE /imaging/{id}**
+
+#### Requisição
+| Método | URL |
+| --- | --- |
+| DELETE | /imaging/{id} |
+
+#### Resposta
+
+| Código de status | Conteúdo |
+| --- | --- |
+| 204 (No Content) em caso de sucesso | Não há conteúdo na resposta. |
+
 # Testes unitários
 
 Dentro da aplicação API, pode ser usado o comando `python manage.py test imaging` para rodar alguns testes unitários desenvolvidos, sendo eles:
