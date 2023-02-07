@@ -11,7 +11,7 @@ Este repositório apresenta uma solução distribuída para o redimensionamento 
 Para o desenvolvimento desse projeto, foram criadas duas aplicações:<br>
 A <b>aplicação API</b> é responsável por fazer a interface com aplicações clientes, onde é possivel fazer solicitações para o processamento de imagens para serem redimensionadas, essas imagens são salvas dentro da <b>aplicação API</b> na pasta /imagens/ e o caminho no model <b>Imagem</b> que podem ser visualizadas pelas aplicações clientes para confirmar se o processamento foi finalizado.<br>
 As imagens são enviadas pela <b>aplicação API</b>, codificadas em base64, para o serviço de mensagem RabbitMq na <b>fila "solicitações_imagem"</b>, onde a <b>aplicação ImageResizer</b> consome a mensagem e realiza o processamento para redimensionar a imagem, após finalizado ela envia a imagem codificada para a <b>fila "resultados"</b>.<br>
-Na <b>aplicação API</b>, existe um script chamado ConsumerResults.py rodando em <i>background</i> que fica de olho se possui novos resultados para consumir, se tiver, ele salva a imagem no sistema e atualiza o status de processamento para finalizado no model.<br>
+Na <b>aplicação API</b>, existe um script chamado ConsumerResults.py rodando em <i>background</i> que observa se possui novos resultados para consumir na fila, se tiver, ele salva a imagem no sistema e atualiza o status de processamento para finalizado no model.<br>
 </p>
 
 
