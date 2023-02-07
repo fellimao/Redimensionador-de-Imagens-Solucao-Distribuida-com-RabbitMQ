@@ -9,9 +9,9 @@ Este repositório apresenta uma solução distribuída para o redimensionamento 
 
 <p align="justify">
 Para o desenvolvimento desse projeto, foram criadas duas aplicações:<br>
-A <b>aplicação Django API</b> é responsável por fazer a interface com aplicações clientes, onde é possivel fazer solicitações para o processamento de imagens para serem redimensionadas, essas imagens são salvas dentro da <b>aplicação Django API</b> na pasta /imagens/ e o caminho no model <b>Imagem</b> que podem ser visualizadas pelas aplicações clientes para confirmar se o processamento foi finalizado.<br>
-As imagens são enviadas pela <b>aplicação Django API</b>, codificadas em base64, para o serviço de mensagem RabbitMq na <b>fila "solicitações_imagem"</b>, onde a <b>aplicação ImageResizer</b> consome a mensagem e realiza o processamento para redimensionar a imagem, após finalizado ela envia a imagem codificada para a <b>fila "resultados"</b>.<br>
-Na <b>aplicação Django API</b>, existe um script chamado ConsumerResults.py rodando em <i>background</i> que observa se possui novos resultados para consumir na fila, se tiver, ele salva a imagem no sistema e atualiza o status de processamento para finalizado no model.<br>
+A <b>aplicação API</b> é responsável por fazer a interface com aplicações clientes, onde é possivel fazer solicitações para o processamento de imagens para serem redimensionadas, essas imagens são salvas dentro da <b>aplicação API</b> na pasta /imagens/ e o caminho no model <b>Imagem</b> que podem ser visualizadas pelas aplicações clientes para confirmar se o processamento foi finalizado.<br>
+As imagens são enviadas pela <b>aplicação API</b>, codificadas em base64, para o serviço de mensagem RabbitMq na <b>fila "solicitações_imagem"</b>, onde a <b>aplicação ImageResizer</b> consome a mensagem e realiza o processamento para redimensionar a imagem, após finalizado ela envia a imagem codificada para a <b>fila "resultados"</b>.<br>
+Na <b>aplicação API</b>, existe um script chamado ConsumerResults.py rodando em <i>background</i> que observa se possui novos resultados para consumir na fila, se tiver, ele salva a imagem no sistema e atualiza o status de processamento para finalizado no model.<br>
 </p>
 
 
@@ -70,7 +70,7 @@ Na <b>aplicação Django API</b>, existe um script chamado ConsumerResults.py ro
 
 # Testes unitários
 
-Dentro da aplicação Django API, pode ser usado o comando `python manage.py test imaging` para rodar alguns testes unitários desenvolvidos, sendo eles:
+Dentro da aplicação API, pode ser usado o comando `python manage.py test imaging` para rodar alguns testes unitários desenvolvidos, sendo eles:
 
 - **Teste de cadastro**<br>
 Faz o procedimento padrão para solicitar uma imagem nova para processamento, deve aumentar um elemento na base de dados e retornar o status 201.
@@ -94,7 +94,7 @@ Após iniciado você pode acessar **localhost:8000** que deve abrir a interface 
 
 ## Ambientes virtuais
 
-Caso prefira também pode executar "na mão" os comandos para inicializar o sistema, para isso é necessário ter setado ambientes virtuais na aplicação Django API e na ImageResizer, lembre-se de instalar os **requirements.txt** de cada uma.
+Caso prefira também pode executar "na mão" os comandos para inicializar o sistema, para isso é necessário ter setado ambientes virtuais na aplicação API e na ImageResizer, lembre-se de instalar os **requirements.txt** de cada uma.
 
 Na pasta **settings.py**, na /API/DjangoApi/ e /ImageResizer/ possivelmente será necessário mudar a variavel MESSAGE_BROKER_HOST para 'localhost'.
 
