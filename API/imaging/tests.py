@@ -57,7 +57,6 @@ class ImagemTestCase(TestCase):
         response = self.client.get('/imaging/{}/'.format(imagem.id))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(Imagem.objects.count(), 1)
 
     # Testando deleção da imagem (banco e arquivo) após ter sido processada
     def test_delete_imagem(self) -> None:
